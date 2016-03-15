@@ -12,14 +12,6 @@ var DiagonalMovement = require('./DiagonalMovement');
 function Grid(width_or_matrix, height, matrix) {
     var width;
 
-    if (typeof width_or_matrix !== 'object') {
-        width = width_or_matrix;
-    } else {
-        height = width_or_matrix.length;
-        width = width_or_matrix[0].length;
-        matrix = width_or_matrix;
-    }
-
     /**
      * The number of columns of the grid.
      * @type number
@@ -47,36 +39,7 @@ function Grid(width_or_matrix, height, matrix) {
  * @see Grid
  */
 Grid.prototype._buildNodes = function(width, height, matrix) {
-    var i, j,
-        nodes = new Array(height);
-
-    for (i = 0; i < height; ++i) {
-        nodes[i] = new Array(width);
-        for (j = 0; j < width; ++j) {
-            nodes[i][j] = new Node(j, i);
-        }
-    }
-
-
-    if (matrix === undefined) {
-        return nodes;
-    }
-
-    if (matrix.length !== height || matrix[0].length !== width) {
-        throw new Error('Matrix size does not fit');
-    }
-
-    for (i = 0; i < height; ++i) {
-        for (j = 0; j < width; ++j) {
-            if (matrix[i][j]) {
-                // 0, false, null will be walkable
-                // while others will be un-walkable
-                nodes[i][j].walkable = false;
-            }
-        }
-    }
-
-    return nodes;
+    return matrix;
 };
 
 
